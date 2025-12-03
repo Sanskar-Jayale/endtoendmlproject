@@ -70,7 +70,7 @@ endtoendmlproject-main
 ### Setup Instructions
 1. **Clone the Repository:**
    ```sh
-   git clone https://github.com/yourusername/endtoendmlproject.git
+   git clone https://github.com/Sanskar-Jayale/endtoendmlproject.git
    cd endtoendmlproject-main
    ```
 2. **Create & Activate Virtual Environment:**
