@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Performance Prediction</title>
-    
-    <!-- Link CSS -->
+    <title>Student Performance Prediction</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+
+<div class="page-container">
     <div class="login">
-        <h1>Student Exam Performance Indicator</h1>
+        <h1>📊 Student Exam Performance Indicator</h1>
+        <p class="subtitle">Predict your Maths score using Machine Learning</p>
+
         <form action="{{url_for('predict_datapoint')}}" method="post">
-            <h1><legend>Student Exam Performance Prediction</legend></h1>
+            <legend>Student Details</legend>
 
             <div class="mb-3">
                 <label class="form-label">Gender</label>
@@ -52,7 +56,7 @@
                 <label class="form-label">Lunch Type</label>
                 <select class="form-control" name="lunch" required>
                     <option disabled selected value="">Select Lunch Type</option>
-                    <option value="free/reduced">Free/Reduced</option>
+                    <option value="free/reduced">Free / Reduced</option>
                     <option value="standard">Standard</option>
                 </select>
             </div>
@@ -67,22 +71,27 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Writing Score out of 100</label>
-                <input class="form-control" type="number" name="writing_score" placeholder="Enter your Writing Score" min="0" max="100" required>
+                <label class="form-label">Writing Score (0–100)</label>
+                <input class="form-control" type="number" name="writing_score" min="0" max="100" placeholder="Enter Writing Score" required>
             </div>
+
             <div class="mb-3">
-                <label class="form-label">Reading Score out of 100</label>
-                <input class="form-control" type="number" name="reading_score" placeholder="Enter your Reading Score" min="0" max="100" required>
+                <label class="form-label">Reading Score (0–100)</label>
+                <input class="form-control" type="number" name="reading_score" min="0" max="100" placeholder="Enter Reading Score" required>
             </div>
+
             <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="Predict your Maths Score">
+                <input class="btn btn-primary" type="submit" value="Predict Maths Score">
             </div>
         </form>
 
-        <h2>The prediction is {{ results }}</h2>
+        {% if results %}
+        <div class="results">
+            🎯 Predicted Maths Score: <strong>{{ results }}</strong>
+        </div>
+        {% endif %}
     </div>
+</div>
 
-    <!-- Link JavaScript -->
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
