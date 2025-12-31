@@ -22,7 +22,8 @@ jobs:
         run: pip install huggingface_hub
 
       - name: Login to Hugging Face
-        run: huggingface login --token ${{ secrets.HF_TOKEN }}
+        run: python -m huggingface_hub login --token ${{ secrets.HF_TOKEN }}
+
 
 
       - name: Push to Hugging Face Space
