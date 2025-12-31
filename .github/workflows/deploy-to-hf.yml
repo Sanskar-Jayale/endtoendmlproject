@@ -22,7 +22,11 @@ jobs:
         run: pip install huggingface_hub
 
       - name: Login to Hugging Face
-        run: python -m huggingface_hub login --token ${{ secrets.HF_TOKEN }}
+        run: |
+          pip install --upgrade huggingface_hub
+          export PATH="$HOME/.local/bin:$PATH"
+          hf login --token ${{ secrets.HF_TOKEN }}
+
 
 
 
