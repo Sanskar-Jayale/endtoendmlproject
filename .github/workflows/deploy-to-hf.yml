@@ -1,0 +1,36 @@
+name: Deploy to Hugging Face Space
+
+on:
+  push:
+    branches:
+      - main  # Trigger workflow on push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+
+    - name: Install Hugging Face CLI
+      run: pip install huggingface_hub
+
+    - name: Login to Hugging Face
+      run: huggingface-cli login --token ${{ secrets.HF_TOKEN }}
+
+    - name: Push to Hugging Face Space
+      run: |
+        # Clone HF Space repo
+        git clone https://huggingface.co/spaces/sanskarjayale/student-exam-performance hf-space
+        # Copy only necessary files
+        cp -r app.py Dockerfile requirements.txt templates static hf-space/
+        cd hf-space
+        git add .
+        git commit -m "Update from GitHub main branch" || echo "No changes to commit"
+        git push
